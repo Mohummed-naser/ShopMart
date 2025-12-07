@@ -24,7 +24,7 @@ export default function Navbar() {
   const { cartData, isLoading } = useContext(CartContext);
   return (
     <>
-      <nav className="bg-inherit sticky top-0 px-5 py-3 drop-shadow-sm text-2xl font-semibold">
+      <nav className="bg-inherit fiexd top-0 px-5 py-3 drop-shadow text-2xl font-semibold z-1">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <Link href={"/"} className="outline-0 font-bold">
@@ -69,7 +69,7 @@ export default function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
               <div className="">
-                <Link href={"/phoppingCart"} className="outline-0 relative">
+                <Link href={"/shoppingCart"} className="outline-0 relative">
                   <ShoppingCartIcon className="cursor-pointer" />
                   <Badge className="absolute -top-3 -end-3 h-5 min-w-5 rounded-full px-1 font-mono">
                     {isLoading ? (

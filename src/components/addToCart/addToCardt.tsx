@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { CartContext } from "../context/CartContext";
 //
 export default function AddToCart({ productId }: { productId: string }) {
-  let { getCart } = useContext(CartContext);
+  const { getCart, setCartData } = useContext(CartContext);
   const [isloading, setIsLoading] = useState(false);
   async function addProductTocart() {
     setIsLoading(true);
@@ -24,15 +24,17 @@ export default function AddToCart({ productId }: { productId: string }) {
       }
     );
     const data = await response.json();
-    data.status == "success" && toast.success('product added successfully')
-    await getCart();
+    data.status == "success" && toast.success("product added successfully");
+    // await getCart();
+    setCartData(data)
     // console.log(data);
     setIsLoading(false);
   }
   return (
     <CardFooter className="gap-2 mt-2">
       <Button onClick={addProductTocart} className="grow cursor-pointer ">
-        {isloading ? <Loader className="animate-spin"/> : <ShoppingCartIcon />} Add to card
+        {isloading ? <Loader className="animate-spin" /> : <ShoppingCartIcon />}
+        Add to card
       </Button>
       <HeartIcon></HeartIcon>
     </CardFooter>

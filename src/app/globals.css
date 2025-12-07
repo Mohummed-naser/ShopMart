@@ -127,3 +127,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* إخفاء الأسهم في متصفح كروم وسفاري */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* إخفاء الأسهم في Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
