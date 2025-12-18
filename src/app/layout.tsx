@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/page";
 import Footer from "@/components/footer/page";
 import { Toaster } from "react-hot-toast";
 import CartContextProvider from "@/components/context/CartContext";
+import MySessionProvider from "@/components/MySessionProvider/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,16 +30,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CartContextProvider>
-          <Navbar />
-          <div className="container mx-auto">
-            {children}
-            <Toaster />
-          </div>
-          <Footer />
-        </CartContextProvider>
+        <MySessionProvider>
+          <CartContextProvider>
+            <Navbar />
+            <div className="container mx-auto">
+              {children}
+              <Toaster />
+            </div>
+            <Footer />
+          </CartContextProvider>
+        </MySessionProvider>
       </body>
     </html>
   );

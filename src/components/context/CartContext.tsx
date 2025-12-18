@@ -30,15 +30,7 @@ export default function CartContextProvider({
 
   async function getCart() {
     setIsLoading(true);
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/cart",
-      {
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjZWZhZWQwZmEzYjU4ZGFiOGI4YiIsIm5hbWUiOiJhaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NDU1MDY4LCJleHAiOjE3NzIyMzEwNjh9.Njfu67zT57TCgEVW4Ks9J5H6D8_lFo5ioW5MNHYK5vs",
-        },
-      }
-    );
+    const response = await fetch("http://localhost:3000/api/get-cart"); //Route Handler
     const data: CartResponse = await response.json();
     setCartData(data);
     setCartOwner(data.data);

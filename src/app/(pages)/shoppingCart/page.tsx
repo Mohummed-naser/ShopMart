@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Loader, ShoppingCartIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import CheckOut from "@/components/checkOut/CheckOut";
@@ -19,14 +19,17 @@ export default function shoppingCart() {
   const [btnLoading, setBtnLoading] = useState(false);
   const [isShopping, setIsShopping] = useState(false);
   const router = useRouter();
-  if (
-    typeof cartData?.data.products[0]?.product == "string" ||
-    cartData == null
-  ) {
-    getCart();
-  }
+  useEffect(() => {
+    if (
+      typeof cartData?.data.products[0]?.product == "string" ||
+      cartData == null
+    ) {
+      getCart();
+    }
+  }, [cartData, getCart]);
   //method deletItem
   async function removeCartItem(productId: string) {
+    
     setRemovingId(productId);
     const response = await fetch(
       `https://ecommerce.routemisr.com/api/v1/cart/` + productId,
@@ -34,7 +37,7 @@ export default function shoppingCart() {
         method: "DELETE",
         headers: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjZWZhZWQwZmEzYjU4ZGFiOGI4YiIsIm5hbWUiOiJhaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NDU1MDY4LCJleHAiOjE3NzIyMzEwNjh9.Njfu67zT57TCgEVW4Ks9J5H6D8_lFo5ioW5MNHYK5vs",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2VhMWEwMjAzN2YwZDI5MDQ1MTdmOCIsIm5hbWUiOiJtb2hhbWVkIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjU3MTIzMTksImV4cCI6MTc3MzQ4ODMxOX0.3A9YGhhLjAVk-WJLlCZQu7_9QZcqN0CKJJnLHrZQ0EA",
         },
       }
     );
@@ -59,7 +62,7 @@ export default function shoppingCart() {
         body: JSON.stringify({ count }),
         headers: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjZWZhZWQwZmEzYjU4ZGFiOGI4YiIsIm5hbWUiOiJhaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NDU1MDY4LCJleHAiOjE3NzIyMzEwNjh9.Njfu67zT57TCgEVW4Ks9J5H6D8_lFo5ioW5MNHYK5vs",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2VhMWEwMjAzN2YwZDI5MDQ1MTdmOCIsIm5hbWUiOiJtb2hhbWVkIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjU3MTIzMTksImV4cCI6MTc3MzQ4ODMxOX0.3A9YGhhLjAVk-WJLlCZQu7_9QZcqN0CKJJnLHrZQ0EA",
           "content-type": "application/json", // for row json,
         },
       }
@@ -82,7 +85,7 @@ export default function shoppingCart() {
         method: "DELETE",
         headers: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjZWZhZWQwZmEzYjU4ZGFiOGI4YiIsIm5hbWUiOiJhaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NDU1MDY4LCJleHAiOjE3NzIyMzEwNjh9.Njfu67zT57TCgEVW4Ks9J5H6D8_lFo5ioW5MNHYK5vs",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2VhMWEwMjAzN2YwZDI5MDQ1MTdmOCIsIm5hbWUiOiJtb2hhbWVkIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjU3MTIzMTksImV4cCI6MTc3MzQ4ODMxOX0.3A9YGhhLjAVk-WJLlCZQu7_9QZcqN0CKJJnLHrZQ0EA",
         },
       }
     );

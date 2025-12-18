@@ -12,13 +12,10 @@ import Image from "next/image";
 import Link from "next/link";
 import MyIconStar from "@/components/myIconStar/myIconStar";
 import AddToCart from "@/components/addToCart/addToCardt";
-export default async function CategoryIdDetails({
-  params,
-}: {
-  params: Params;
-}) {
-  let{categoryId} = await params;
-
+export default async function CategoryIdDetails({ params }: { params: Params }) {
+  // const categoryId = params.categoryId;
+  let { categoryId } = await params;
+  
   const response = await fetch(
     `https://ecommerce.routemisr.com/api/v1/products?category=${categoryId}`
   );

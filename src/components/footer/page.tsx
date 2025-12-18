@@ -26,7 +26,9 @@ export default function Footer() {
               <h5 className="mb-5">SHOP</h5>
               <ul className="flex flex-col gap-2">
                 <Link href={"/products"}>Electronics</Link>
-                <Link href={"/products"}>Fashion</Link>
+                <Link href={"/categories/6439d58a0049ad0b52b9003f"}>
+                  Fashion
+                </Link>
                 <Link href={"/products"}>Home & Garden</Link>
                 <Link href={"/products"}>Sports</Link>
                 <Link href={"/products"}>Deals</Link>

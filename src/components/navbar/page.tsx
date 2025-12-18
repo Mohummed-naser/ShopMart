@@ -20,7 +20,11 @@ import Link from "next/link";
 import { Loader, ShoppingCartIcon, UserIcon } from "lucide-react";
 import { createContext } from "vm";
 import { CartContext } from "../context/CartContext";
+import { signOut, useSession } from "next-auth/react";
 export default function Navbar() {
+  const session = useSession();
+  // console.log(session);
+
   const { cartData, isLoading } = useContext(CartContext);
   return (
     <>
@@ -49,37 +53,59 @@ export default function Navbar() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              {session.status == "authenticated" && (
+                <h6 className="text-[20px]">{session.data.user.name}</h6>
+              )}
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <UserIcon className="outline-0" />
+                <DropdownMenuTrigger className="outline-0">
+                  <UserIcon className=" cursor-pointer" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <Link href={"/profile"}>
-                    <DropdownMenuItem>profile</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/login"}>
-                    <DropdownMenuItem>Login</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/register"}>
-                    <DropdownMenuItem>Register</DropdownMenuItem>
-                  </Link>
+                  {session.status == "authenticated" ? (
+                    <>
+                      <Link href={"/profile"}>
+                        <DropdownMenuItem>profile</DropdownMenuItem>
+                      </Link>
+                      <Link href={"/login"}>
+                        <DropdownMenuItem onClick={() => {
+                          // signOut() is a built-in method in NextAuth
+                          signOut({
+                            callbackUrl:"/"
+                          });
+                        }}>
+                          Logout
+                        </DropdownMenuItem>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href={"/login"}>
+                        <DropdownMenuItem>Login</DropdownMenuItem>
+                      </Link>
+                      <Link href={"/register"}>
+                        <DropdownMenuItem>Register</DropdownMenuItem>
+                      </Link>
+                    </>
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
-              <div className="">
-                <Link href={"/shoppingCart"} className="outline-0 relative">
-                  <ShoppingCartIcon className="cursor-pointer" />
-                  <Badge className="absolute -top-3 -end-3 h-5 min-w-5 rounded-full px-1 font-mono">
-                    {isLoading ? (
-                      <Loader className="animate-spin" />
-                    ) : (
-                      cartData?.numOfCartItems
-                    )}
-                  </Badge>
-                </Link>
-              </div>
+              {session.status == "authenticated" && (
+                <div className="">
+                  <Link href={"/shoppingCart"} className="outline-0 relative">
+                    <ShoppingCartIcon className="cursor-pointer" />
+                    <Badge className="absolute -top-3 -end-3 h-5 min-w-5 rounded-full px-1 font-mono">
+                      {isLoading ? (
+                        <Loader className="animate-spin" />
+                      ) : (
+                        cartData?.numOfCartItems
+                      )}
+                    </Badge>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

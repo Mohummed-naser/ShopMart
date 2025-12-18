@@ -32,8 +32,7 @@ export default function CheckOut({ cartId }: { cartId: string }) {
         body: JSON.stringify({ shippingAddress }),
         headers: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjZWZhZWQwZmEzYjU4ZGFiOGI4YiIsIm5hbWUiOiJhaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NDU1MDY4LCJleHAiOjE3NzIyMzEwNjh9.Njfu67zT57TCgEVW4Ks9J5H6D8_lFo5ioW5MNHYK5vs",
-          "content-type": "application/json",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2VhMWEwMjAzN2YwZDI5MDQ1MTdmOCIsIm5hbWUiOiJtb2hhbWVkIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjU3MTIzMTksImV4cCI6MTc3MzQ4ODMxOX0.3A9YGhhLjAVk-WJLlCZQu7_9QZcqN0CKJJnLHrZQ0EA",
         },
       }
     );
