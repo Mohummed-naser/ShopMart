@@ -60,7 +60,6 @@ export default function AddToCart({
     }
   }
 
-  
   return (
     <CardFooter className="gap-2 mt-2">
       <Button onClick={addProductTocart} className="grow cursor-pointer ">
@@ -69,7 +68,7 @@ export default function AddToCart({
       </Button>
       <button
         type="button"
-        disabled={wishlistLoading} 
+        disabled={wishlistLoading}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

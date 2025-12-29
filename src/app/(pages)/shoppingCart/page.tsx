@@ -32,7 +32,6 @@ export default function shoppingCart() {
     }
   }, [cartData, getCart]);
 
- 
   //method deletItem
   async function removeCartItem(productId: string) {
     setRemovingId(productId);
